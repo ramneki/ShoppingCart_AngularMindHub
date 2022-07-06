@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CorpsalesComponent } from './corpsales/corpsales.component';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
 
 const baseLayoutRouting: Routes = [
@@ -52,10 +51,6 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-  },
-  {
-    path: 'corpsales',
-    loadChildren: () => import('src/app/corpsales/corpsales.module').then(m => m.CorpsalesModule)
   }
 ];
 
