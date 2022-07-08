@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrdersService } from 'src/app/services/orders.service';
-import { orderdetail } from 'src/app/shared/data/orderdetail';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard-order',
@@ -9,18 +8,10 @@ import { orderdetail } from 'src/app/shared/data/orderdetail';
 })
 export class DashboardOrderComponent implements OnInit {
   public orderDetails: any;
-  // orderDetail: orderdetail[] = [];
 
-  constructor(private orderService: OrdersService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.getOrdersStatus();
   }
 
-  getOrdersStatus(): void {
-    this.orderService.getOrdersStatus().subscribe((data: any) => {
-      this.orderDetails = data;
-      console.log(this.orderDetails);
-    });
-  }
 }

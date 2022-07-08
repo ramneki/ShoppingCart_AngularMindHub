@@ -57,6 +57,7 @@ UserProductList(){
     debugger
     this.TotalPrice=0;
     this.productList = data;
+    console.log('Cart Details', this.productList);
     for(var i=0;i<this.productList.length;i++){
       if(this.TotalPrice!=null && this.TotalPrice!=0 &&   this.TotalPrice!=undefined){
               this.TotalPrice = this.TotalPrice+this.productList[i].cartTotal;

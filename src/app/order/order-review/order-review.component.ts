@@ -3,6 +3,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 declare var Razorpay: any;
 @Component({
@@ -55,7 +56,7 @@ export class OrderReviewComponent implements OnInit {
     private userService: UserService,
     private orderService: OrdersService,
     private formBuilder:FormBuilder,
-    
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -158,10 +159,19 @@ debugger;
     this.addShippingDetails();
   }
   }
+
   @HostListener('window:payment.success', ['$event'])
   onPaymentSuccess(event: any): void {
     this.message = 'Success Payment';
+    console.log('Payment message', this.message);
+
+    if(this.message == 'Success Payment'){
+      if(confirm("Payment made successfully !")) {
+        this.router.navigate(['/products']);
+      }
+    }
   }
+
   addShippingDetails() {
     this.shippingDetails.controls['CheckoutId'].setValue(this.checkoutId);
     this.orderService.addShippingDetails(this.shippingDetails.value).subscribe((data: any) => {

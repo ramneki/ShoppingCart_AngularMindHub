@@ -18,8 +18,7 @@
     </tr>
   </tbody>
 </table> -->
-<div>
-  <h5 class="mb-3 font-medium">My Orders</h5>
+<!--  <h5 class="mb-3 font-medium">My Orders</h5>
   <div class="table-inside">
     <table class="order-table table-auto ltMd:responsive">
       <thead>
@@ -56,11 +55,11 @@
             <span>{{ order.productType }}</span>
           </td>
           <td>
-            <!-- <span>{{ order.imageName }}</span> -->
+            <span>{{ order.imageName }}</span>
             <span>1</span>
           </td>
           <td>
-            <!-- <span><img src="{{ order.imageUrl }}" /></span> -->
+            <span><img src="{{ order.imageUrl }}" /></span>
             <span>{{ order.ourPrice }}</span>
           </td>
           <td>
@@ -94,7 +93,9 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
+
+  <div>  
   <h5 class="mb-3 font-medium">Orders</h5>
   <div class="table-inside">
     <table class="order-table table-auto ltMd:responsive">
@@ -121,7 +122,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr *ngFor="let order of orderDetails" class="border">
+        <tr *ngFor="let order of orderDetails" class="border">
           <td>
             <a class="text-primary" href="/">#{{ order?.id }}</a>
           </td>
@@ -163,7 +164,6 @@
             </mat-menu>
           </td>
         </tr>
-      </tbody> -->
       </tbody>
     </table>
   </div>
