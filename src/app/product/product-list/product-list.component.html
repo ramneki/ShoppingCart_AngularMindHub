@@ -112,14 +112,13 @@
                 <div class="ll-product__creator text-accent font-bold ml-0"> {{ product.productType}}</div>
               </div>
               <div class="flex justify-between mt-2">
-                <div class="ll-product__price-label">List Price:</div>
+                <div class="ll-product__price-label">Our Price:</div>
                 <div class="ll-product__creator text-accent font-bold">
-                  <del>₹{{ product.listPrice }}</del>
+                  <del *ngIf="product.listPrice != product.ourPrice">₹{{ product.listPrice }}</del>
                   </div>
               </div>
 
               <div class="flex mt-2">
-                
                 <div class="ll-product__price  text-accent font-bold">₹{{ product.ourPrice }}</div>
               </div>
             </div>

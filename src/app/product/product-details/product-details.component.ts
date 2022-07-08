@@ -108,8 +108,8 @@ AddToCart(){
     BookId:this.ItemId,
     UserId: 1,
     Quantity:this.quantity!=null?this.quantity:1,
-    CartTotal:this.bookDetails.ourPrice,
-    DiscountPer:0,
+    CartTotal:this.bookDetails.listPrice,
+    DiscountPer:this.perDiscount,
     NetPay:this.bookDetails.ourPrice,
 
   };
