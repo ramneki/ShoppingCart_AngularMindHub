@@ -26,4 +26,12 @@ export class OrdersService {
   addShippingDetails(shippingDetails: any){
     return this.http.post(this.baseUrl + 'Orders/ShippingDetails', shippingDetails);
   }
+
+  addOrderDetails(bookIds: any, userId: any, checkoutId: any){
+    return this.http.post(this.baseUrl + 'Orders/AddOrderDetails?userId='+ userId + '&checkoutId='+ checkoutId, bookIds);
+  }
+
+  getOrdersPlaced(userId: any){
+    return this.http.get(this.baseUrl + 'Orders/GetOrdersPlaced?userId=' + userId);
+  }
 }
