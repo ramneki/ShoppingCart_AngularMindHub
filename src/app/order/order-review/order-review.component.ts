@@ -161,7 +161,6 @@ debugger;
     });
     // console.log('Payment Amount', this.taxData.finalPay);
     // console.log('Shipping Details', this.shippingDetails.value);
-    this.addShippingDetails();
   }
   }
 
@@ -174,7 +173,9 @@ debugger;
       // save payment details into payments table
       // generate payment reciept and pass order id and payment details into it.
 
+      this.addShippingDetails();
       this.addOrderDetails(this.bookIds, this.userId, this.checkoutId);
+      this.emptyCart();
 
       if(confirm("Payment made successfully !")) {
         this.router.navigate(['/products']);
@@ -194,5 +195,9 @@ debugger;
     this.orderService.addOrderDetails(bookIds, userId, checkoutId).subscribe((data: any)=> {
       console.log('Orders Data added successfully', data);
     })
+  }
+
+  emptyCart(){
+    this.userService.EmptyToCart(this.userId).subscribe();
   }
 }

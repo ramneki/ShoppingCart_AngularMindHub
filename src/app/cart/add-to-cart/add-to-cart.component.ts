@@ -12,6 +12,8 @@ export class AddToCartComponent implements OnInit {
 productList=[];
 ItemId:any;
 TotalPrice:number;
+userId : any = 1; // passed hard-coded to be taken from local storage
+
   constructor(private userService:UserService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
@@ -88,16 +90,8 @@ RemoveToCart(Id:any){
   )
 }
 EmptyToCart(){
-  const Item = {
-    //BookId:Id,
-    UserId: 1,
-    // Quantity:1,
-    // CartTotal:this.bookDetails.ourPrice,
-    // DiscountPer:0,
-    // NetPay:this.bookDetails.ourPrice,
 
-  };
-  this.userService.EmptyToCart(Item).subscribe(
+  this.userService.EmptyToCart(this.userId).subscribe(
      
     data => {
       debugger
