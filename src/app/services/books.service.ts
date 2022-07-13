@@ -32,6 +32,16 @@ export class BookserviceService {
   private CreateCompleteRoute=(route:string,envAddress:string)=>{
     return `${envAddress}${route}`;
   }
+  bindDropDown(menuName:any,route:string){
+    return this.http.get(this.baseUrl+route+menuName)   
+  }
+
+  applyFilter(form: any){
+    return this.http.post(this.baseUrl + 'Books/ApplyFilter', form);
+  }
+  searchBook(bookName:string){
+    return this.http.get(this.baseUrl+'Books/SerachBook?bookName='+bookName );
+  }
   private generateHeaders=()=>{
     return {
       headers:new HttpHeaders({'content-Type':'application/json'})
