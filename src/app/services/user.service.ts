@@ -29,9 +29,9 @@ export class UserService {
     debugger
     return this.httpClient.post(this.baseAPIurl + "Cart/RemoveToCart" ,object);
   }
-  EmptyToCart(object:any) {
+  EmptyToCart(userId: any) {
     debugger
-    return this.httpClient.post(this.baseAPIurl + "Cart/EmptyCart" ,object);
+    return this.httpClient.post(this.baseAPIurl + "Cart/EmptyCart" ,userId);
   }
   UpdateCart(object:any) {
     debugger

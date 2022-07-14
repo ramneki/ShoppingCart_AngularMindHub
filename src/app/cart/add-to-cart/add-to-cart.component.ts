@@ -91,16 +91,8 @@ RemoveToCart(Id:any){
   )
 }
 EmptyToCart(){
-  const Item = {
-    //BookId:Id,
-    UserId: this.userId,
-    // Quantity:1,
-    // CartTotal:this.bookDetails.ourPrice,
-    // DiscountPer:0,
-    // NetPay:this.bookDetails.ourPrice,
 
-  };
-  this.userService.EmptyToCart(Item).subscribe(
+  this.userService.EmptyToCart(this.userId).subscribe(
      
     data => {
       debugger

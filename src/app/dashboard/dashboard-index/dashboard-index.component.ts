@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'll-dashboard-index',
@@ -6,51 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-index.component.scss']
 })
 export class DashboardIndexComponent implements OnInit {
-  orders = [];
-  constructor() {}
+  latestOrders : any = [];
+  userId: any = 1; //to be taken from local storge
+
+  constructor(private orderService: OrdersService) {}
 
   ngOnInit(): void {
-    this.orders = [
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'complated',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Lynch Dean',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'pending',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Lynch Dean',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'rejected',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'initialized',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'complated',
-        price: 2145.0
-      }
-    ];
+   this.getLatestOrders();
+  }
+
+  getLatestOrders(){
+    this.orderService.getOrdersPlaced(this.userId).subscribe((data: any)=> {
+      this.latestOrders = data;
+      this.latestOrders = this.latestOrders.slice(0,5);
+      console.log('Latest Orders Data', this.latestOrders);
+    })
   }
 }

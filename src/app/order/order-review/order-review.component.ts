@@ -18,6 +18,7 @@ export class OrderReviewComponent implements OnInit {
   productList: any = [];
   taxData: any = [];
   checkoutId: any;
+  bookIds: any =[];
   message: any = 'Not yet stared';
   paymentId = '';
   error = '';
@@ -111,6 +112,9 @@ debugger;
       this.TotalPrice=0;
       this.productList = data;
       for (var i = 0; i < this.productList.length; i++) {
+
+        this.bookIds.push(this.productList[i].bookId);
+
         if (this.TotalPrice != null && this.TotalPrice != 0 && this.TotalPrice != undefined) {
           this.TotalPrice = this.TotalPrice + this.productList[i].cartTotal;
         } else {
@@ -118,6 +122,7 @@ debugger;
         }
       }
       console.log('Cart Details', this.productList, 'Total Price', this.TotalPrice);
+      console.log('Book Ids array', this.bookIds);
       this.calculateTax();
     });
   }
@@ -157,7 +162,6 @@ debugger;
     });
     // console.log('Payment Amount', this.taxData.finalPay);
     // console.log('Shipping Details', this.shippingDetails.value);
-    this.addShippingDetails();
   }
   }
 
@@ -167,6 +171,13 @@ debugger;
     console.log('Payment message', this.message);
 
     if(this.message == 'Success Payment'){
+      // save payment details into payments table
+      // generate payment reciept and pass order id and payment details into it.
+
+      this.addShippingDetails();
+      this.addOrderDetails(this.bookIds, this.userId, this.checkoutId);
+      this.emptyCart();
+
       if(confirm("Payment made successfully !")) {
         this.router.navigate(['/products']);
       }
@@ -179,5 +190,15 @@ debugger;
       console.log('Shipping Details Added', data);
       this.shippingDetails.reset();
     });
+  }
+
+  addOrderDetails(bookIds: any, userId: any, checkoutId: any){
+    this.orderService.addOrderDetails(bookIds, userId, checkoutId).subscribe((data: any)=> {
+      console.log('Orders Data added successfully', data);
+    })
+  }
+
+  emptyCart(){
+    this.userService.EmptyToCart(this.userId).subscribe();
   }
 }

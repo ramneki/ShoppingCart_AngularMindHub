@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookserviceService } from 'src/app/services/books.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { BookDetails } from 'src/app/shared/data/BookDetails';
+import { filterParams } from 'src/app/shared/data/filterParams';
 import { productsDB } from '../../shared/data/products';
 
 @Component({
@@ -19,10 +21,17 @@ export class ProductListComponent implements OnInit {
   ITMenu = [];
   ProfMenu = [];
   subMenuSelected: any;
-  
+  certifications:any=[];
+  contentType:any=[];
+  publishers:any=[];
+  priceRange:any=[];
+  filterParams:filterParams;
+  form:FormGroup;
+
   constructor(
     private bookService: BookserviceService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private formBuilder:FormBuilder
     ) {}
 
   ngOnInit(): void {
@@ -34,11 +43,29 @@ export class ProductListComponent implements OnInit {
     this.getMenuList();
     this.getITSubMenu();
     this.getProfSubMenu();
+    this.bindDropdown();
+    this.filterForm();
   }
 
+  filterForm(){
+    this.form=this.formBuilder.group({
+      contentType:[''],
+      publishers:[''],
+      certifications:[''],
+      priceRange:[''],
+
+
+    })
+  }
+
+
   getAllBooks(){
+    debugger;
+    this.subMenuSelected="";
     this.bookService.getBooks().subscribe((data: any)=> {
       this.bookData = data;
+      this.bindDropdown();
+      //this.form.reset();
       console.log('Bookdata', this.bookData);
     })
   }
@@ -80,7 +107,32 @@ export class ProductListComponent implements OnInit {
     console.log("Selected sub menu", this.subMenuSelected);
     this.menuService.getBooksBySubMenu(this.subMenuSelected).subscribe((data: any)=> {
       this.bookData = data;
+      this.bindDropdown();
     })
   }
+  bindDropdown(){
+    
+    const apiUrl='Books/BindDropdown?menuName=';
+    this.bookService.bindDropDown(this.subMenuSelected,apiUrl).subscribe((data:any)=>{
+      this.certifications=data.certifications;
+      this.contentType=data.contentType;
+      this.publishers=data.publishers;
+      this.priceRange=['10 to 50','50 to 100','100 to 200','200 to 300'];
+      console.log('filterData:', data);
+    })
+  }
+  
+applyFilter(){
+  debugger;
+  this.bookService.applyFilter(this.form.value).subscribe((data:any)=>{
+    console.log('Shipping Details Added', data);
+    this.bookData=data;
+  })
+}
 
+searchByBookName(bookName:string){
+  this.bookService.searchBook(bookName).subscribe((data:any)=>{
+  this.bookData=data;
+  })
+}
 }
