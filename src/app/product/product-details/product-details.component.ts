@@ -31,11 +31,13 @@ export class ProductDetailsComponent implements OnInit {
  // images: GalleryItem[];
  ItemId:any;
  result:any;
+ userId:any;
   constructor(private _http:HttpClient,private activateRoute:ActivatedRoute,
     private bookService:BookserviceService,private route:Router,private userService:UserService,private datePipe:DatePipe) { }
 
   ngOnInit() {
     this.ItemId = this.activateRoute.snapshot.paramMap.get('id');
+    this.userId=localStorage.getItem('mnd:uid');
    //this.getBookImageById();
    
     
@@ -81,7 +83,7 @@ addToWishlist(bookId){
   const id = this.activateRoute.snapshot.paramMap.get('id');
   const wishlisItem:addWishlist={
     bookId:Number(id),
-    userId:1,
+    userId:this.userId,
     isLiked:true,
     createdOn:this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),
     createdBy:1
@@ -106,7 +108,7 @@ AddToCart(){
   var id=this.ItemId;
   const Item = {
     BookId:this.ItemId,
-    UserId: 1,
+    UserId: this.userId,
     Quantity:this.quantity!=null?this.quantity:1,
     CartTotal:this.bookDetails.listPrice,
     DiscountPer:this.perDiscount,

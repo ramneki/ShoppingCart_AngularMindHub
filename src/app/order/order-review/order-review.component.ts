@@ -13,7 +13,7 @@ declare var Razorpay: any;
 
 })
 export class OrderReviewComponent implements OnInit {
-  userId = 1; // passed hard-coded to be retrieved from local storage
+  userId : any; // passed hard-coded to be retrieved from local storage
   TotalPrice: any;
   productList: any = [];
   taxData: any = [];
@@ -60,6 +60,7 @@ export class OrderReviewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.userId=localStorage.getItem('mnd:uid');
     this.buildForm();
     this.getCartDetails();
   }

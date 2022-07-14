@@ -12,17 +12,20 @@ export class AddToCartComponent implements OnInit {
 productList=[];
 ItemId:any;
 TotalPrice:number;
+userId:any;
   constructor(private userService:UserService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
     debugger
+    this.userId=localStorage.getItem('mnd:uid');
    // this.ItemId = this.route.snapshot.paramMap.get('id');
     this.ItemId = this.route.paramMap
     .pipe(map(() => window.history.state)) 
     this.UserProductList();
+   
   }
 UserProductList(){
-  let userId=1;
+  let userId=this.userId;
   // this.userService.GetItemToCart(userId).subscribe(
      
   //   data => {
@@ -70,7 +73,7 @@ UserProductList(){
 RemoveToCart(Id:any){
   const Item = {
     BookId:Id,
-    UserId: 1,
+    UserId: this.userId,
     // Quantity:1,
     // CartTotal:this.bookDetails.ourPrice,
     // DiscountPer:0,
@@ -90,7 +93,7 @@ RemoveToCart(Id:any){
 EmptyToCart(){
   const Item = {
     //BookId:Id,
-    UserId: 1,
+    UserId: this.userId,
     // Quantity:1,
     // CartTotal:this.bookDetails.ourPrice,
     // DiscountPer:0,
@@ -118,7 +121,7 @@ Qty.value=1;
   const Item = {
     CartId:Data.cartId,
     BookId:Data.bookId,
-    UserId: 1,
+    UserId: this.userId,
     Quantity:Qty.value,
     // CartTotal:this.bookDetails.ourPrice,
     // DiscountPer:0,

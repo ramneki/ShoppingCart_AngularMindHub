@@ -5,14 +5,21 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { NumberDirective } from '../shared/helpers/numbers-only-directive';
 
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent],
+  declarations: [LoginComponent, SignupComponent,NumberDirective],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
+    
+  ],
+  providers:[AuthService]
 })
 export class AuthModule { }

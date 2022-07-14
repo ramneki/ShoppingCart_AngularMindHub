@@ -11,9 +11,10 @@ export class DashboardProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   userData: any =[];
-  userId = 2;
+  userId :any;
 
   ngOnInit(): void {
+    this.userId=localStorage.getItem('mnd:uid');
     this.getUserById(this.userId);
   }
 
