@@ -14,7 +14,7 @@ export class DashboardProfileComponent implements OnInit {
   userId :any;
 
   ngOnInit(): void {
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
     this.getUserById(this.userId);
   }
 

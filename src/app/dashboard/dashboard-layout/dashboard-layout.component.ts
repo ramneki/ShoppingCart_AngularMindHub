@@ -23,7 +23,7 @@ export class DashboardLayoutComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
     });

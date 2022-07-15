@@ -17,7 +17,7 @@ userId:any;
 
   ngOnInit(): void {
     debugger
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
    // this.ItemId = this.route.snapshot.paramMap.get('id');
     this.ItemId = this.route.paramMap
     .pipe(map(() => window.history.state)) 

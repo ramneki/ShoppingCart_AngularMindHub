@@ -37,7 +37,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.ItemId = this.activateRoute.snapshot.paramMap.get('id');
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
    //this.getBookImageById();
    
     

@@ -61,7 +61,7 @@ export class OrderReviewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
     this.buildForm();
     this.getCartDetails();
   }

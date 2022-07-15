@@ -17,7 +17,7 @@ export class DashboardSavedItemComponent implements OnInit {
   constructor(private ordersService:OrdersService,private activateRoute:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.userId=localStorage.getItem('mnd:uid');
+    this.userId=parseInt(localStorage.getItem('mnd:uid'));
     this.products = productsDB.Product;
     this.getWishListItem();
   }
