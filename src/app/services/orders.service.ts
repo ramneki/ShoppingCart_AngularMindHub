@@ -19,8 +19,8 @@ export class OrdersService {
     return this.http.get<orderdetail[]>(this.baseUrl + 'Orders/GetOrderStatus');
   }
 
-  createCheckout(totalAmount) {
-    return this.http.post(this.baseUrl + 'Orders/Checkout', totalAmount);
+  createCheckout(totalAmount:any,userID:any) {
+    return this.http.post(this.baseUrl + 'Orders/Checkout?userId='+userID, totalAmount);
   }
 
   addShippingDetails(shippingDetails: any){
