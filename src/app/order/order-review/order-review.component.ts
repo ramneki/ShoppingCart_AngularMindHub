@@ -173,17 +173,18 @@ debugger;
     if(this.message == 'Success Payment'){
       // save payment details into payments table
       // generate payment reciept and pass order id and payment details into it.
-
-      this.addShippingDetails();
+      this.afterPayments();      
+    }
+  }
+  afterPayments(){
+    this.addShippingDetails();
       this.addOrderDetails(this.bookIds, this.userId, this.checkoutId);
       this.emptyCart();
 
       if(confirm("Payment made successfully !")) {
         this.router.navigate(['/products']);
       }
-    }
   }
-
   addShippingDetails() {
     this.shippingDetails.controls['CheckoutId'].setValue(this.checkoutId);
     this.orderService.addShippingDetails(this.shippingDetails.value).subscribe((data: any) => {
@@ -201,4 +202,60 @@ debugger;
   emptyCart(){
     this.userService.EmptyToCart(this.userId).subscribe();
   }
+
+  
+  checkout() {
+    debugger;
+    if(this.shippingDetails.invalid){
+      this.shippingDetails.markAllAsTouched();
+    }
+    else{
+      this.stripeCheckout("Book", this.finalPay * 100, (token: any) =>
+    this.takePayment("Book", this.finalPay * 100, token)
+   // this.tokenDetails=token;
+     //console.log("token",token)
+    );
+    }
+    
+    
+  }
+
+  takePayment(productName: string, amount: number, token: any) {
+    debugger;
+    console.log("token",token);
+    let body = {
+      tokenId: token.id,
+      productName: productName,
+      amount: amount
+    };
+    let bodyString = JSON.stringify(body);
+    let headers = new Headers({ "Content-Type": "application/json" });
+   // let options = new RequestOptions({ headers: headers });
+
+    this.orderService.stripePayments(body)
+      .subscribe((res:any)=>{
+        console.log("Stripe Result ",res);
+      })
+      this.afterPayments();    
+  }
+
+  stripeCheckout(productName: string, amount: number, tokenCallback) {
+    let handler = (<any>window).StripeCheckout.configure({
+      key: "pk_test_51LLNGNSBVnjJH0yCQcL6tPtycsmOKoln5rOHPgzy1aM7RZjwLtet1Nul9BbnA2v71chpKvBBp2WjLG7n62Dxm5LU002lP0BIKB",
+      locale: "auto",
+      token: tokenCallback
+    });
+
+    handler.open({
+      name: "Book Shop",
+      description: productName,
+      zipCode: false,
+      currency: "inr",
+      amount: amount,
+      panelLabel: "Pay {{amount}}",
+      allowRememberMe: false
+    });
+    
+  }
+
 }

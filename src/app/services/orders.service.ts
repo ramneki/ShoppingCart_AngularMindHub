@@ -34,4 +34,7 @@ export class OrdersService {
   getOrdersPlaced(userId: any){
     return this.http.get(this.baseUrl + 'Orders/GetOrdersPlaced?userId=' + userId);
   }
+  stripePayments(bodyString:any){
+    return this.http.post(this.baseUrl+'Orders/StripePayment', bodyString);
+  }
 }

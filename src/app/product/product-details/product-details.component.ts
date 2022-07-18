@@ -54,7 +54,7 @@ export class ProductDetailsComponent implements OnInit {
 
     this.bookService.getImageById(apiUrl).subscribe((data:any)=>{
       this.imageDetails=data;
-      console.log(this.imageDetails);   
+       
     })
    
 
@@ -119,7 +119,7 @@ AddToCart(){
  this.userService.AddToCart(Item).subscribe(
      
   data => {
-    debugger
+    debugger;
    
     this.route.navigate(['/cart']);
    
