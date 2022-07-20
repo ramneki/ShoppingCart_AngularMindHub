@@ -31,5 +31,14 @@ export class AuthService {
    
     return this.httpClient.post(this.baseAPIurl + "Account/forgotpassword" ,object);
   }
+
+  LoginLog(object:any) {
+   
+    return this.httpClient.post(this.baseAPIurl + "Account/loginlog" ,object);
+  }
+  ssoregister(object:any) {
+   
+    return this.httpClient.post(this.baseAPIurl + "Account/ssoregister" ,object);
+  }
 }
 

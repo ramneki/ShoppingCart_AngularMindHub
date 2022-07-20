@@ -1,6 +1,8 @@
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AmazonLoginProvider, FacebookLoginProvider, GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService, VKLoginProvider } from 'angularx-social-login';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/shared/data/user';
 import { MustMatch } from 'src/app/shared/helpers/must-match-validator';
@@ -20,7 +22,8 @@ forgotpassworddata:FormGroup;
 emailPattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
   constructor( private formBuilder:FormBuilder,
     private router: Router,
-    private authserice:AuthService
+    private authserice:AuthService,
+    private readonly _socialauthService: SocialAuthService
    ) { }
 
   ngOnInit(): void {
@@ -121,4 +124,125 @@ emailPattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
         // button click handler
      }
       // end forgot password section
+
+      
+      signInWithFB(): void {
+        this._socialauthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+          (res)=>{
+            console.log('FB:-', res)
+          }
+        )
+      }
+    
+      signInWithAmazon(): void {
+        this._socialauthService.signIn(AmazonLoginProvider.PROVIDER_ID).then(
+          (res)=>{
+            console.log('AMZ:-', res)
+          }
+        )
+      }
+    
+      signInWithVK(): void {
+        this._socialauthService.signIn(VKLoginProvider.PROVIDER_ID).then(
+          (res)=>{
+            console.log('VK:-', res)
+          }
+        )
+      }
+    
+      signInWithMicrosoft(): void {
+        this._socialauthService.signIn(MicrosoftLoginProvider.PROVIDER_ID).then(
+          (res)=>{
+            console.log('MS:-', res)
+            const payload = {
+              UserName: res.response.account.username,
+              Password: '',
+              FirstName: res.firstName,
+              LastName: res.lastName,
+              Phone: '',
+              Email: res.email,
+            };
+            this.authserice.ssoregister(payload).subscribe(
+              (data: any) => {
+                debugger
+              // alert("registration successfully Done");
+               const logpayload = {
+               userId:data.userId,
+               provider: res.provider,
+               providerId:res.id,
+              // loginTime: /
+               logoutTime: res.response.account.expiresOn,
+              };
+              this.SOSLogin(logpayload);
+              },
+              error => {
+                alert(error.error)
+              }
+            );
+          }
+        )
+      }
+    
+      signOut(): void {
+        this._socialauthService.signOut();
+      }
+    
+      refreshGoogleToken(): void {
+        this._socialauthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+      }
+      public signInWithGoogle(): void {
+        this._socialauthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+          (res)=>{
+            console.log('Google:-', res) 
+            const payload = {
+              UserName: res.name,
+              Password: '',
+              FirstName: res.firstName,
+              LastName: res.lastName,
+              Phone: '',
+              Email: res.email,
+            };
+            this.authserice.ssoregister(payload).subscribe(
+              (data: any) => {
+                debugger
+              // alert("registration successfully Done");
+               const logpayload = {
+               userId:data.userId,
+               provider: res.provider,
+               providerId:res.id,
+              // loginTime: /
+              // logoutTime: res.response.expires_at,
+              };
+              this.SOSLogin(logpayload);
+              },
+              error => {
+                alert(error.error)
+              }
+            );
+          }
+        )
+      }
+
+      SOSLogin(logpayload:any){
+        this.authserice.LoginLog(logpayload).subscribe(
+          (data: any) => {
+            debugger
+            this.users=data;
+            localStorage.setItem('mnd:uid', data.userId);
+            localStorage.setItem('mnd:actkn', data.token);
+            localStorage.setItem('mnd:uname', data.userName);
+            localStorage.setItem('mnd:phone', data.phone);
+            localStorage.setItem('mnd:isActive', data.isActive);
+               // localStorage.setItem('ctm:reftkn', data);
+               this.router.navigate(['/']);
+          // alert("Login sucess");
+          },
+          error => {
+            alert(error.error)
+          }
+        );
+        }
+
+      
+     
 }

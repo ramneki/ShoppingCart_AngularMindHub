@@ -33,3 +33,33 @@
 .is-invalid{
   border: 2px solid #fe0000!important;
 }
+.bg-transparent {
+  background-color: transparent;
+}
+
+:host {
+  height: 100%;
+}
+
+.photo {
+  object-fit: contain;
+}
+
+.card {
+  width: 20rem;
+  margin: 0 auto;
+}
+
+
+// .btn-facebook {
+//     color: #fff;
+//     background-color: #3b5998;
+//     border-color: rgba(0,0,0,.2);
+// }
+.btn-social-icon {
+    position: relative;
+    text-align: left;
+    height: 34px;
+    width: 34px;
+    padding: 0;
+}
