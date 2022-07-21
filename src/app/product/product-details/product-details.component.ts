@@ -108,10 +108,12 @@ AddToCart(){
   debugger
   if(this.userId==undefined||this.userId==null||this.userId==''||this.userId==NaN){
     alert('please login');
+    this.route.navigate(['/auth/login']);
     return;
   }
   if (Number.isNaN(this.userId)) {
     alert('please login');
+    this.route.navigate(['/auth/login']);
     return;
   }
   var id=this.ItemId;
