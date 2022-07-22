@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { NumberDirective } from '../shared/helpers/numbers-only-directive';
+import { SocialAuthService } from 'angularx-social-login';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { NumberDirective } from '../shared/helpers/numbers-only-directive';
     ReactiveFormsModule
     
   ],
-  providers:[AuthService]
+  providers:[AuthService,SocialAuthService]
 })
 export class AuthModule { }
