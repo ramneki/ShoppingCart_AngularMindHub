@@ -210,6 +210,7 @@ debugger;
       this.shippingDetails.markAllAsTouched();
     }
     else{
+      
       this.stripeCheckout("Book", this.finalPay * 100, (token: any) =>
     this.takePayment("Book", this.finalPay * 100, token)
    // this.tokenDetails=token;
@@ -226,7 +227,12 @@ debugger;
     let body = {
       tokenId: token.id,
       productName: productName,
-      amount: amount
+      amount: amount,
+      email:token.email,
+      card_expMonth:token.card.exp_month,
+      card_expYear:token.card.exp_year,
+      card_id:token.card.id
+
     };
     let bodyString = JSON.stringify(body);
     let headers = new Headers({ "Content-Type": "application/json" });
