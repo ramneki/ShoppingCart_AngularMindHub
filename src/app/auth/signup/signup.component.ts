@@ -69,6 +69,7 @@ signup(){
       data => {
         debugger
        alert("registration successfully Done");
+       this.router.navigate(['/auth/login']);
       },
       error => {
         alert(error.error)
