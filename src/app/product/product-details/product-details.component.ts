@@ -62,7 +62,7 @@ export class ProductDetailsComponent implements OnInit {
   bookDetailById(){
     debugger;   
     const id = this.activateRoute.snapshot.paramMap.get('id');
-    const apiUrl:string=`books/GetBookById?id=${id}`;
+    const apiUrl:string=`books/GetBookById?id=${id}&userId=${this.userId}`;
 
     this.bookService.getBookById(apiUrl).subscribe((data:any)=>{
       this.bookDetails=data;
@@ -95,6 +95,8 @@ addToWishlist(bookId){
     this.bookService.addBooktowishlist(apiUrl,wishlisItem).subscribe({
       next:(owner:addWishlist)=>{
         const Status="Succesfully added to wishlist.";
+        this.wishListAdded=true;
+        
 
       },
       error:()=>{

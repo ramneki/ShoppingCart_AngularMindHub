@@ -17,6 +17,10 @@ export class BookserviceService {
   getBooks(){
     return this.http.get<BookDetails[]>(this.baseUrl + 'Books');
   }
+  getAllBooks(){
+    return this.http.get<BookDetails[]>(this.baseUrl + 'Books/GetAllBook');
+  }
+
   getImageById(route:string){
     return this.http.get<ImageDetails[]>(this.baseUrl+route)
   }
@@ -36,11 +40,20 @@ export class BookserviceService {
     return this.http.get(this.baseUrl+route+menuName)   
   }
 
+
+  AddBook(form: FormData ){
+    debugger;
+    return this.http.post(this.baseUrl + 'Books/UploadBook', form);
+  }
   applyFilter(form: any){
     return this.http.post(this.baseUrl + 'Books/ApplyFilter', form);
   }
   searchBook(bookName:string){
     return this.http.get(this.baseUrl+'Books/SerachBook?bookName='+bookName );
+  }
+
+  setStatus(bookId:any){
+   return this.http.get(this.baseUrl+'Books/UpdateStatus?bookId='+bookId );
   }
   private generateHeaders=()=>{
     return {

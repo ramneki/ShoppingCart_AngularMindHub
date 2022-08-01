@@ -131,8 +131,14 @@ applyFilter(){
 }
 
 searchByBookName(bookName:string){
-  this.bookService.searchBook(bookName).subscribe((data:any)=>{
-  this.bookData=data;
-  })
+  debugger;
+  if(bookName=='' || bookName== undefined)
+  {
+this.getAllBooks();
+  }
+  else{this.bookService.searchBook(bookName).subscribe((data:any)=>{
+    this.bookData=data;
+    })}
+  
 }
 }

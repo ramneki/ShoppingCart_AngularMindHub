@@ -21,6 +21,10 @@ export const menuList: Menu[] = [
     name: 'Dashboard'
   },
   {
+    path: '/admin',
+    name: 'Admin'
+  },
+  {
     path: '/cart',
     name: 'Cart'
   }
