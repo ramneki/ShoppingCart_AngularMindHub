@@ -32,7 +32,7 @@ export class AdminAddbookComponent implements OnInit {
       listprice: [null, [Validators.required, Validators.pattern("^(0|[1-9][0-9]*)$")]],
       rating: [null, [Validators.required, Validators.minLength(1)]],
       
-      email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      // email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       
       image: [null],
 

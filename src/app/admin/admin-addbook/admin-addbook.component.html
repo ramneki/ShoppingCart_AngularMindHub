@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="example-container mt-4">
   <form [formGroup]="addBook" (ngSubmit)="saveDetails(addBook)">
     <div class="row">
         <div class="col-lg-4 mt-4">
@@ -91,7 +91,7 @@
         </mat-error> -->
     </mat-form-field>
 </div>
-<div class="col-lg-4 mt-4">
+<!-- <div class="col-lg-4 mt-4">
     <mat-form-field >
         <mat-label>Email Address:</mat-label>
         <input matInput type="email" formControlName="email" placeholder="Your email">
@@ -100,7 +100,7 @@
         <mat-error>Email is required</mat-error>
         <mat-error *ngIf="validateControl('email') && errorHandling('email','pattern')">Please enter valid email address</mat-error>
     </mat-form-field>
-</div>
+</div> -->
 <div class="col-lg-4 mt-4">
     <mat-form-field  >
       <mat-label>Details:</mat-label>

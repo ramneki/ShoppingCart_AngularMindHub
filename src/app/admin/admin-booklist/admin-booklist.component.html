@@ -40,17 +40,18 @@
                 <tbody>
                     <tr *ngFor="let product of bookData | paginate: { itemsPerPage: 10, currentPage: p }">
                         <td>{{product.bookId}}</td>
-                        <td>{{product.title}}}</td>
+                        <td>{{product.title}}</td>
                         <td><img [src]="product.image" [alt]="product.title" width="40" class="shadow-4" /></td>                     
                         <td>{{product.ourPrice}}</td>
                         <td>{{product.rating}}</td>
                         <td><mat-slide-toggle [checked]="product.isActive" (click)="setStatus(product.bookId)"></mat-slide-toggle></td>
-                        <td><button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" [routerLink]="['/admin', product.bookId]">
+                        <td *ngIf="product.isActive"><button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" [routerLink]="['/admin', product.bookId]">
                             <mat-icon>edit</mat-icon>
                           </button></td>
                         <!-- <td><button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
                             <mat-icon>delete</mat-icon>
                           </button></td> -->
+                          
                          
 
                     </tr>

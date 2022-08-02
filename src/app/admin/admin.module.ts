@@ -8,6 +8,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {  MatPaginatorModule } from "@angular/material/paginator";
+
 import { SharedModule } from '../shared/shared.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -21,6 +23,8 @@ import {ButtonModule} from 'primeng/button';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminEditbookComponent } from './admin-editbook/admin-editbook.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AdminUsermanagementComponent } from './admin-usermanagement/admin-usermanagement.component';
+
 
 
 
@@ -30,7 +34,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     AdminLayoutComponent,
     AdminAddbookComponent,
     AdminBooklistComponent,
-    AdminEditbookComponent
+    AdminEditbookComponent,
+    AdminUsermanagementComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +50,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSortModule,
     MatButtonModule,
     MatToolbarModule,
-    TableModule,ButtonModule,NgxPaginationModule,MatSlideToggleModule
+    TableModule,ButtonModule,NgxPaginationModule,MatSlideToggleModule,MatPaginatorModule
   ]
 })
 export class AdminModule { }

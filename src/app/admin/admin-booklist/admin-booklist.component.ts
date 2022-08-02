@@ -39,6 +39,7 @@ export class AdminBooklistComponent implements OnInit {
     this.bookService.setStatus(bookId).subscribe((data: any)=> {
       this.bookData = data;
       this.isActive=data.isActive;
+      this.getAllBooks();
       console.log('Bookdata', this.bookData);
     })
   }
